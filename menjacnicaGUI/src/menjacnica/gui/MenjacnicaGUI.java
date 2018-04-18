@@ -20,6 +20,9 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import menjacnica.Menjacnica;
+
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
@@ -46,12 +49,13 @@ public class MenjacnicaGUI extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JMenuBar menuBar;
 	private JMenu mnFile;
-	private JMenu mnNewMenu;
+	private JMenu mnHelp;
 	private JPanel panel;
-	private JButton btnNewButton;
+	private JButton btnDodajKurs;
 	private JButton btnObrisiKurs;
 	private JButton btnIzvrsiZamenu;
 	private JScrollPane scrollPane;
@@ -65,10 +69,10 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem mntmObrisiKurs;
 	private JMenuItem mntmIzvrsiZamenu;
 	private JScrollPane scrollPane_1;
-	private JTextArea textArea;
+	protected JTextArea textArea;
 	
 	//klasa na logickom nivou
-	protected MenjacnicaGUI sistem;
+	protected Menjacnica sistem;
 	
 	
 
@@ -114,13 +118,15 @@ public class MenjacnicaGUI extends JFrame {
 		contentPane.add(getPanel(), BorderLayout.EAST);
 		contentPane.add(getScrollPane(), BorderLayout.CENTER);
 		contentPane.add(getScrollPane_1(), BorderLayout.SOUTH);
+		sistem=new Menjacnica();
+	
 	}
 
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
 			menuBar = new JMenuBar();
 			menuBar.add(getMnFile());
-			menuBar.add(getMnNewMenu());
+			menuBar.add(getMnHelp());
 		}
 		return menuBar;
 	}
@@ -133,29 +139,34 @@ public class MenjacnicaGUI extends JFrame {
 		}
 		return mnFile;
 	}
-	private JMenu getMnNewMenu() {
-		if (mnNewMenu == null) {
-			mnNewMenu = new JMenu("Help");
-			mnNewMenu.add(getMntmAbout());
+	private JMenu getMnHelp() {
+		if (mnHelp == null) {
+			mnHelp = new JMenu("Help");
+			mnHelp.add(getMntmAbout());
 		}
-		return mnNewMenu;
+		return mnHelp;
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
 			panel.setPreferredSize(new Dimension(160, 10));
 			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-			panel.add(getBtnNewButton());
+			panel.add(getBtnDodajKurs());
 			panel.add(getBtnObrisiKurs());
 			panel.add(getBtnIzvrsiZamenu());
 		}
 		return panel;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("Dodaj kurs");
+	private JButton getBtnDodajKurs() {
+		if (btnDodajKurs == null) {
+			btnDodajKurs = new JButton("Dodaj kurs");
+			btnDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					prikaziDodajKurs();
+				}
+			});
 		}
-		return btnNewButton;
+		return btnDodajKurs;
 	}
 	private JButton getBtnObrisiKurs() {
 		if (btnObrisiKurs == null) {
@@ -283,6 +294,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmDodajKurs() {
 		if (mntmDodajKurs == null) {
 			mntmDodajKurs = new JMenuItem("Dodaj kurs");
+			mntmDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					prikaziDodajKurs();
+				}
+			});
 		}
 		return mntmDodajKurs;
 	}
@@ -355,7 +371,14 @@ public class MenjacnicaGUI extends JFrame {
 	
 	private void prikaziAboutProzor(){
 		JOptionPane.showMessageDialog(contentPane,
-				"Autor: Monika Milenkoviæ, Verzija 1.0", "O programu Menjacnica",
+				"Autor: Monika Milenkovic, Verzija 1.0", "O programu Menjacnica",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
+	private void prikaziDodajKurs() {
+		DodajKursGUI dg=new DodajKursGUI(this); 
+		dg.setLocationRelativeTo(contentPane);
+		dg.setVisible(true);
+		
+	}
 }
+
