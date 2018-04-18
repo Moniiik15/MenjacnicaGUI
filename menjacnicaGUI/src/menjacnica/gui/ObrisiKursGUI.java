@@ -210,7 +210,7 @@ public class ObrisiKursGUI extends JFrame {
 			dispose();
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(contentPane, e1.getMessage(),
-					"Greska", JOptionPane.ERROR_MESSAGE);
+					"Greska!", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}

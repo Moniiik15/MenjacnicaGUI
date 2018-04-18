@@ -71,7 +71,7 @@ public class MenjacnicaGUI extends JFrame {
 	private JScrollPane scrollPane_1;
 	protected JTextArea textArea;
 	
-	//klasa na logickom nivou
+	
 	protected Menjacnica sistem;
 	
 	
@@ -118,6 +118,7 @@ public class MenjacnicaGUI extends JFrame {
 		contentPane.add(getPanel(), BorderLayout.EAST);
 		contentPane.add(getScrollPane(), BorderLayout.CENTER);
 		contentPane.add(getScrollPane_1(), BorderLayout.SOUTH);
+		
 		sistem=new Menjacnica();
 	
 	}
@@ -182,6 +183,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnIzvrsiZamenu() {
 		if (btnIzvrsiZamenu == null) {
 			btnIzvrsiZamenu = new JButton("Izvrsi zamenu");
+			btnIzvrsiZamenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					prikaziIzvrsiZamenu();
+				}
+			});
 		}
 		return btnIzvrsiZamenu;
 	}
@@ -321,6 +327,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmIzvrsiZamenu() {
 		if (mntmIzvrsiZamenu == null) {
 			mntmIzvrsiZamenu = new JMenuItem("Izvrsi zamenu");
+			mntmIzvrsiZamenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					prikaziIzvrsiZamenu();
+				}
+			});
 		}
 		return mntmIzvrsiZamenu;
 	}
@@ -397,6 +408,12 @@ public class MenjacnicaGUI extends JFrame {
 		og.setLocationRelativeTo(contentPane);
 		og.setVisible(true);
 		
+		
+	}
+	private void prikaziIzvrsiZamenu(){
+		IzvrsiZamenuGUI ig=new IzvrsiZamenuGUI(this);
+		ig.setLocationRelativeTo(contentPane);
+		ig.setVisible(true);
 		
 	}
 }
